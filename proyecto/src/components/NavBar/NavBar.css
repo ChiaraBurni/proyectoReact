@@ -1,0 +1,30 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #f1efe8;
+    color: black;
+  }
+  
+  header nav ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  header nav ul li {
+    cursor: pointer;
+    margin: 0 1rem;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: "Cinzel";
+  }
+.brand img {
+    height: 8rem;
+  }
+
