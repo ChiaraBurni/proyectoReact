@@ -1,0 +1,25 @@
+.card {
+    width: 18rem;
+    height: auto;
+    background-color: #f1efe8;
+    border-color: black;
+    font-family: "Cinzel, serif";
+
+
+
+}
+
+.ItemImg {
+    width: 16rem;
+    height: auto;
+    border-color: black;
+}
+
+.card-title{
+    font-size: 16px;
+}
+
+.Option {
+    border-color: black;
+
+}
