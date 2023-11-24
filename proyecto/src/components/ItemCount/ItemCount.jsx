@@ -1,33 +1,34 @@
 import React, { useState } from 'react';
 
-const ItemCount = ({ initial, stock, onAdd }) => {
-    const [quantity, setQuantity] = useState(initial);
+const ItemCount = ({ inicial, stock, onAdd }) => {
+    const [cantidad, setCantidad] = useState(inicial);
+    const [nuevoStock, setNuevoStock] = useState(stock)
 
-    const increment = () => {
-        if (quantity < stock) {
-            setQuantity(quantity + 1);
+    const handleIncrementar = () => {
+        if (cantidad < stock) {
+            setCantidad(cantidad + 1)
+            setNuevoStock(nuevoStock - 1)
         }
-    };
-
-    const decrement = () => {
-        if (quantity > 0) {
-            setQuantity(quantity - 1);
+    }
+    const handleDecrementar = () => {
+        if (cantidad > 1) {
+            setCantidad(cantidad - 1)
+            setNuevoStock(nuevoStock + 1)
         }
-    };
+    }
 
     return (
-        <div className="Counter">
-            <div className="Controls">
-                <button className="Button" onClick={decrement}>-</button>
-                <h4 className='Number'>{quantity}</h4>
-                <button className="Button" onClick={increment}>+</button>
+        <div className='ItemCount'>
+            <p>Se encuentra disponible {nuevoStock - inicial} unidades de este producto </p>
+            <div className='botonesContador'>
+                <button className='botonContador' onClick={handleDecrementar}>-</button>
+                <p className='cantidadContador'>{cantidad}</p>
+                <button className='botonContador' onClick={handleIncrementar}>+</button>
             </div>
-            <div>
-                <button className="Button" onClick={() => onAdd(quantity)} disabled={!stock}>Agregar</button>
-            </div>
+            <button className='botonAgregarCarrito' onClick={() => onAdd(cantidad)}> Agregar al carrito </button>
         </div>
-    );
-};
+    )
+}
 
-export default ItemCount;
+export default ItemCount
 

@@ -1,0 +1,45 @@
+
+ .ItemDetail {
+    width: 60%;
+    margin: 0.5rem;
+    text-align: center;
+  }
+  
+  .ItemImg {
+    width: 50%; 
+    max-height: 30rem;
+    object-fit: contain;
+    height: auto;
+    border-color: black;
+  }
+  
+  .card-title {
+    font-size: 16px;
+    margin: 1rem;
+    text-align: center;
+  }
+  
+  .Option {
+    border-color: black;
+  }
+  
+  .botonesContador {
+    display: flex;
+    align-items: center;
+  }
+  
+  .botonContador {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin: 0.2rem;
+    cursor: pointer;
+  }
+  
+  .cantidadContador {
+    font-size: 1rem;
+    margin: 0 0.2rem;
+  }
+  
+  
+
+  
