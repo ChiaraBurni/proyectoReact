@@ -1,44 +1,57 @@
-import { useState, useContext, useEffect } from "react"
-import { db } from "../../service/firebase"
-import { Timestamp, doc, getDoc } from "firebase/firestore"
-import { CarritoContext } from "../../context/CarritoContext"
-import Cart from "../Cart/Cart"
-import CheckoutForm from '../CheckoutForm/CheckoutForm'
-
-
+import { useState, useContext } from "react";
+import { db } from "../../service/firebase";
+import { Timestamp, writeBatch, collection, addDoc, doc, increment } from "firebase/firestore";
+import { CarritoContext } from "../../context/CarritoContext";
+import CheckoutForm from '../CheckoutForm/CheckoutForm';
 
 const Checkout = () => {
-  document.title = `AUREO | Checkout`
-  const { carrito, total, cantidadTotal } = useContext(CarritoContext)
-  const [usuario, setUsuario] = useState(null)
+  document.title = `AUREO | Checkout`;
+  const { carrito, total } = useContext(CarritoContext);
+ 
+  const [orderId, setOrderId] = useState(null);
 
-
-const createOrder = async ({name,phone,email}) => {
+  const createOrder = async ({ name, phone, email }) => {
     try {
-        const objOreder = {
-            buyer: {name,phone,email},
-            items: carrito,
-            total: total,
-            date: Timestamp.fromDate(new Date())
-        }
-        const batch = writeBatch(db)
-        const outOfStock = []
-    }catch (error) {
-        console.error("Error al crear la orden:", error);
+      const objOrder = {
+        buyer: { name, phone, email },
+        items: carrito,
+        total: total,
+        date: Timestamp.fromDate(new Date())
+      };
+
+      const batch = writeBatch(db);
+
+    
+      for (const item of objOrder.items) {
+        const productRef = doc(db, 'items', item.item.id);
+        batch.update(productRef, { stock: increment(-item.cantidad) });
       }
 
-}
-if(orderId) {
-    return <h1>El Id de su orden es: {orderId}</h1>
-}
+  
+      await batch.commit();
 
-return (
+   
+      const ordersCollection = collection(db, 'orders');
+      const orderDocRef = await addDoc(ordersCollection, objOrder);
+
+      
+      setOrderId(orderDocRef.id);
+
+    } catch (error) {
+      console.error("Error al crear la orden:", error);
+    }
+  };
+
+  if (orderId) {
+    return <h1>El Id de su orden es: {orderId}</h1>;
+  }
+
+  return (
     <div>
-        <h1>Checkout</h1>
-        <CheckoutForm onConfirm={createOrder}/>
+      <h1>Checkout</h1>
+      <CheckoutForm onConfirm={createOrder} />
     </div>
-)
+  );
+};
 
-}
-
-export default Checkout
+export default Checkout;

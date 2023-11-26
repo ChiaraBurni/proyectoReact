@@ -9,6 +9,7 @@ const CheckoutForm = ({ onConfirm }) => {
     event.preventDefault();
 
     const userData = { name, phone, email };
+    console.log("Calling onConfirm:", onConfirm);
     onConfirm(userData);
   }
 
@@ -49,3 +50,4 @@ const CheckoutForm = ({ onConfirm }) => {
 }
 
 export default CheckoutForm;
+

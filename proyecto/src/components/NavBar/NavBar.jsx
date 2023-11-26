@@ -1,14 +1,13 @@
 import React from 'react'
 import CartWidget from '../CartWidget/CartWidget'
 import "./NavBar.css"
-import imagen from "./logo.png"
 import { NavLink, Link } from 'react-router-dom'
 
 const NavBar = () => {
   return (
     <header className='navBar'>
       <div className='brand'>
-      <Link to='/'> <img src={imagen} alt="Logo de la marca" /></Link>
+      <Link to='/'> <img src='https://i.pinimg.com/564x/13/35/6e/13356e09ba81c5bbe77f9a3433fead50.jpg' alt="Logo de la marca" /></Link>
        
       </div>
       <nav className='NavBar'>
